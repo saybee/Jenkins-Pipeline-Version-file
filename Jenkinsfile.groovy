@@ -18,8 +18,7 @@ pipeline{
           echo "Deployment ${WORKSPACE}"
           def TODAY = new Date()
           def dir1 = "${WORKSPACE}/tmp"
-          def folder = fileExists(dir1)
-          if(folder){
+          if(fileExists(dir1)){
             dir (dir1) {
               deleteDir()
             }
@@ -35,8 +34,8 @@ pipeline{
            dir(dir1){
               writeFile file : "version.txt",text : "id :${appID}\ntag:${appTag}\nversion:${appVer}\n"
             }
-          sh "ls -l ${WORKSPACE}/tmp/version.txt"
-          sh "cat ${WORKSPACE}/tmp/version.txt"
+          sh "ls -l ${dir1}/version.txt"
+          sh "cat ${dir1}/version.txt"
         }
       }
     }
