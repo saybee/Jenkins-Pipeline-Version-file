@@ -17,9 +17,10 @@ pipeline{
         script{
           echo "Deployment ${WORKSPACE}"
           def TODAY = new Date()
-          def folder = fileExists("${WORKSPACE}/tmp")
+          def dir1 = "${WORKSPACE}/tmp"
+          def folder = fileExists(dir1)
           if(folder){
-            dir ("${WORKSPACE}/tmp") {
+            dir (dir1) {
               deleteDir()
             }
           }
@@ -31,7 +32,7 @@ pipeline{
           def appVer = (env.BUILD_NUMBER==null)?"LOCAL BUILD" : env.BUILD_NUMBER
           
           
-           dir("${WORKSPACE}/tmp"){
+           dir(dir1){
               writeFile file : "version.txt",text : "id :${appID}\ntag:${appTag}\nversion:${appVer}\n"
             }
           sh "ls -l ${WORKSPACE}/tmp/version.txt"
