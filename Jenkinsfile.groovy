@@ -15,8 +15,8 @@ pipeline{
     stage('Deploy') {
       steps{
         echo "Deployment ${WORKSPACE}"
-      }
-      script{
+        script{
+          echo "Deployment ${WORKSPACE}"
           def TODAY = new Date()
           println("${TODAY}")
           def appID = (${BUILD_ID}==null)? TODAY : ${BUILD_ID}
@@ -33,6 +33,7 @@ pipeline{
           sh "ls -l ${WORKSPACE}/tmp/version.txt"
           sh "cat ${WORKSPACE}/tmp/version.txt"
         }
+      }
     }
   }
 }
