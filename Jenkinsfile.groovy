@@ -20,7 +20,7 @@ pipeline{
           def appID = (${BUILD_ID}==null)? TODAY : ${BUILD_ID}
           def appTag = ${JOB_NAME}
           def appVer = (${BUILD_NUMBER}==null)?"LOCAL BUILD" : ${BUILD_NUMBER}
-          if(!fileExists("${WORKSPACE}/tmp")){
+          if(fileExists("${WORKSPACE}/tmp")==false){
             dir("${WORKSPACE}/tmp"){
                 writeFile file : "version.txt",text : "id :${appID}\ntag:${appTag}\nversion:${appVer}\n"
                 }
