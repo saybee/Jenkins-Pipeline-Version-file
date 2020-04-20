@@ -24,7 +24,7 @@ pipeline{
           def appID = (env.BUILD_ID==null)? TODAY : env.BUILD_ID
           def appTag = env.JOB_NAME
           def appVer = (env.BUILD_NUMBER==null)?"LOCAL BUILD" : env.BUILD_NUMBER
-          def folder = fileExists("${WORKSPACE}/tmp"
+          def folder = fileExists("${WORKSPACE}/tmp")
           if(folder)){
             dir ("${WORKSPACE}/tmp") {
               deleteDir()
