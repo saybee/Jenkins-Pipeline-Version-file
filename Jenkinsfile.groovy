@@ -29,7 +29,7 @@ pipeline{
               writeFile file : "version.txt",text : "id :${appID}\ntag:${appTag}\nversion:${appVer}\n"
             }
           } else{
-            sh "cd ${WORKSPACE}/tmp"
+            sh "cd ${WORKSPACE}/tmp/"
             sh "rm -rf version.txt"
             writeFile file : "version.txt",text : "id :${appID}\ntag:${appTag}\nversion:${appVer}\n"
           }
