@@ -28,9 +28,7 @@ pipeline{
             dir("${WORKSPACE}/tmp"){
               writeFile file : "version.txt",text : "id :${appID}\ntag:${appTag}\nversion:${appVer}\n"
             }
-          } else{
           }
-          
           sh "ls -l ${WORKSPACE}/tmp/version.txt"
           sh "cat ${WORKSPACE}/tmp/version.txt"
       }
