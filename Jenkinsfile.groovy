@@ -15,7 +15,6 @@ pipeline{
       steps{
         echo 'Deployment'
         script{
-          echo 'Inside script'
           def TODAY = new Date()
           def appID = (${BUILD_ID}==null)? TODAY : ${BUILD_ID}
           def appTag = ${JOB_NAME}
