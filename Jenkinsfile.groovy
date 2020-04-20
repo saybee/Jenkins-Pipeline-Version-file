@@ -17,19 +17,18 @@ pipeline{
         script{
           echo 'Inside script'
           def TODAY = new Date()
+          def folder = fileExists("${WORKSPACE}/tmp")
+          if(!folder.exists()){
+            folder.mkdirs()
+          }
+          def versionFile = project.file("${WORKSPACE}/tmp/version.txt");
           def appID = (${BUILD_ID}==null)? TODAY : ${BUILD_ID}
           def appTag = ${JOB_NAME}
           def appVer = (${BUILD_NUMBER}==null)?"LOCAL BUILD" : ${BUILD_NUMBER}
-          if(fileExists("${WORKSPACE}/tmp")==false){
-            dir("${WORKSPACE}/tmp"){
-                writeFile file : "version.txt",text : "id :${appID}\ntag:${appTag}\nversion:${appVer}\n"
-                }
-          } else{
-            sh "cd ${WORKSPACE}/tmp"
-            writeFile file : "version.txt",text : "id :${appID}\ntag:${appTag}\nversion:${appVer}\n"
-          }
-                sh "ls -l ${WORKSPACE}/tmp/version.ver"
-                sh "cat ${WORKSPACE}/tmp/version.ver"
+          versionFile.delete()
+          versionFile << "id: ${appID}\ntag: ${appTag}\nversion:${appVer}\n"
+          sh "ls -l ${WORKSPACE}/tmp/version.txt"
+          sh "cat ${WORKSPACE}/tmp/version.txt"
         }
       }
     }
