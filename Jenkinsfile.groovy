@@ -1,10 +1,5 @@
 pipeline{
   agent any
-  environment{
-    WORKSPACE = ${WORKSPACE}
-    BUILD_ID
-  } 
-
   stages{
     stage('Compile stage'){
       steps{
