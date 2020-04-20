@@ -1,5 +1,10 @@
 pipeline{
   agent any
+  
+  environment{
+    WORKSPACE = '/Users/vedant/Documents'
+    
+  }
   stages{
     stage('Compile stage'){
       steps{
@@ -16,6 +21,7 @@ pipeline{
         echo 'Deployment'
         script{
           def TODAY = new Date()
+          println("${TODAY}")
           def appID = (${BUILD_ID}==null)? TODAY : ${BUILD_ID}
           def appTag = ${JOB_NAME}
           def appVer = (${BUILD_NUMBER}==null)?"LOCAL BUILD" : ${BUILD_NUMBER}
