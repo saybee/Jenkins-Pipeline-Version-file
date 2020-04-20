@@ -14,6 +14,7 @@ pipeline{
     stage('Deploy') {
       steps{
         echo "Deployment ${WORKSPACE}"
+        script{
           echo "Deployment ${WORKSPACE}"
           def TODAY = new Date()
           println("${TODAY}")
@@ -31,6 +32,7 @@ pipeline{
           }
           sh "ls -l ${WORKSPACE}/tmp/version.txt"
           sh "cat ${WORKSPACE}/tmp/version.txt"
+        }
       }
     }
   }
