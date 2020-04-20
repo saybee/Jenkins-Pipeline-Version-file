@@ -17,7 +17,7 @@ pipeline{
         script{
           echo 'Inside script'
           def TODAY = new Date()
-          def folder = fileExists("${WORKSPACE}/tmp")
+          def folder = project.file("${WORKSPACE}/tmp")
           if(!folder.exists()){
             folder.mkdirs()
           }
