@@ -1,5 +1,9 @@
 pipeline{
   agent any
+  environment{
+    WORKSPACE = ${WORKSPACE}
+    BUILD_ID
+  } 
 
   stages{
     stage('Compile stage'){
@@ -15,10 +19,12 @@ pipeline{
     stage('Deploy') {
       steps{
         echo "Deployment ${WORKSPACE}"
-        script{
           echo "Deployment ${WORKSPACE}"
           def TODAY = new Date()
           println("${TODAY}")
+          echo "BUILD_ID ${BUILD_ID}"
+          echo "JOB_NAME ${JOB_NAME}"
+          echo "BUILD_NUMBER ${BUILD_NUMBER}"
           def appID = (${BUILD_ID}==null)? TODAY : ${BUILD_ID}
           def appTag = ${JOB_NAME}
           def appVer = (${BUILD_NUMBER}==null)?"LOCAL BUILD" : ${BUILD_NUMBER}
@@ -32,7 +38,6 @@ pipeline{
           
           sh "ls -l ${WORKSPACE}/tmp/version.txt"
           sh "cat ${WORKSPACE}/tmp/version.txt"
-        }
       }
     }
   }
