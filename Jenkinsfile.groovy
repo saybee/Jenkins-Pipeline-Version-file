@@ -1,10 +1,6 @@
 pipeline{
   agent any
-  
-  environment{
-    WORKSPACE = '/Users/vedant/Documents'
-    
-  }
+
   stages{
     stage('Compile stage'){
       steps{
