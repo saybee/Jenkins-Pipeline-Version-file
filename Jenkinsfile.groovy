@@ -32,10 +32,10 @@ pipeline{
           
           
            dir(dir1){
-              writeFile file : "version.txt",text : "id :${appID}\ntag:${appTag}\nversion:${appVer}\n"
+              writeFile file : "version.js",text : "id :${appID}\ntag:${appTag}\nversion:${appVer}\n"
             }
-          sh "ls -l ${dir1}/version.txt"
-          sh "cat ${dir1}/version.txt"
+          sh "ls -l ${dir1}/version.js"
+          sh "cat ${dir1}/version.js"
         }
       }
     }
